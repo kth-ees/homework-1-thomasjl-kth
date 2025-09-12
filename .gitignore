@@ -8,4 +8,6 @@
 
 *.mti
 
+*.dbg
+
 work/

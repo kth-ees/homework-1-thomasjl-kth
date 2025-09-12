@@ -1,6 +1,6 @@
 module sum_prod #(parameter N) (
-  input  logic [N-1:0] X [5:0],
-  output logic [2N+1:0] result
+  input  wire logic [N-1:0] X [5:0],
+  output wire logic [2*N+1:0] result
 );
 
 logic [N*2-1:0] intermediate_products [2:0];
@@ -24,7 +24,7 @@ add #(2*N, 2*N) summer1 (
 );
 
 add #(2*N+1, 2*N) summer2 (
-  .A(sum1),
+  .A(intermediate_sum),
   .B(intermediate_products[2]),
   .sum(result)
 );
