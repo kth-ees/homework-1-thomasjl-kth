@@ -1,0 +1,25 @@
+module N_ripple_adder #(parameter N) (
+  input logic [N-1:0] A,B,
+  input logic carry_in,
+  output logic [N-1:0] sum,
+  output logic carry_out
+);
+  wire logic [N:0] carries;
+  assign carries[0] = carry_in;
+  
+  genvar i;
+  generate
+    for (i=0;i<N;i++) begin : ripple_loop
+      full_adder add (
+        .a(A[i]),
+        .b(B[i]),
+        .c_in(carries[i]),
+        .c_out(carries[i+1]),
+        .s(sum[i])
+      );
+    end
+  endgenerate
+
+  assign carry_out = carries[N];
+
+endmodule
