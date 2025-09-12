@@ -1,7 +1,7 @@
 `timescale 1ns/1ns
 module multiplier_tb;
 
-  localparam N = 8;
+  localparam N = 4;
 
   // complete
 
