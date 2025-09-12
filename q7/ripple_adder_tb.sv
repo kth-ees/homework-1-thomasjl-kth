@@ -20,12 +20,14 @@ module ripple_adder_tb;
     for (int i=0;i<2**N;i++) begin
         A = i;
         for (int j=0;j<2**N;j++) begin
-            B = j;
-            check_sum = A+B;
-            #10;
-	    if ((sum != check_sum) && (check_sum < 2**N - 1)) begin
-              wrong_counter++;
-	      $display(i,j,sum);
+            check_sum = i+j;
+            if (check_sum < 2**N) begin
+                B = j;
+                #10;
+                if (sum != check_sum) begin
+                    wrong_counter++;
+                    $display(i,j,sum);
+                end
             end
          end
     end
