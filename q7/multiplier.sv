@@ -11,7 +11,7 @@ logic [N:0] sums [N-1:0];   // declare partial sums. Each row is N+1 bits. The f
 assign sums[0][N-1:0] = pp[0]; // Assign first sum of partial product[0] and 0. 
 assign sums[0][N] = 1'b0;      // Assign first carry as 0.
 
-genvar i, j;
+genvar i, j, k;
 generate 
   // Generate AND gates that calculate partial products
   for (i=0;i<N-1;i++) begin
@@ -21,14 +21,15 @@ generate
   end
 
   
-  for (i=1;i<N-1;i++) begin
+  for (k=1;k<N-1;k++) begin
     N_ripple_adder #(N) adder ( // Generate ripple adders that add upper N bits of last partial sum with current partial product
-      .A(pp[i]),
-      .B(sums[i-1][N:1]),
-      .sum(sums[i])
+      .A(pp[k]),
+      .B(sums[k-1][N:1]),
+      .sum(sums[k])
+      assign product[k-1] = sums[k-1][0]; // assign first N-1 bits of product from trailing sums LSBs
     );
 
-    assign product[i-1] = sums[i-1][0]; // assign first N-1 bits of product from trailing sums LSBs
+    
   end
 endgenerate
 
