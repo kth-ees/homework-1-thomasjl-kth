@@ -14,8 +14,8 @@ module ripple_adder_tb;
   );
 
   initial begin
-    var static wrong_counter = 0;
-    var static check_sum = 0;
+    var static int wrong_counter = 0;
+    var static int check_sum = 0;
     carry_in = 1'b0;
     for (int i=0;i<2**N;i++) begin
         A = i;
@@ -26,7 +26,7 @@ module ripple_adder_tb;
                 #10;
                 if (sum != check_sum) begin
                     wrong_counter++;
-                    $display(i,j,sum);
+                    $display("i=%d, j=%d, sum=%d, check_sum=%d", i,j,sum, check_sum);
                 end
             end
          end
