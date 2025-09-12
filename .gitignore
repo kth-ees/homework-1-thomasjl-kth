@@ -3,3 +3,9 @@
 *.bak
 
 *.mpf
+
+*.wlf
+
+*.mti
+
+work/

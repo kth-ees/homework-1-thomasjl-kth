@@ -8,10 +8,8 @@ module multiplier #(parameter N) (
 logic [N-1:0]   pp [N-1:0]; // declare partial products. pp[i] is the product of b[i] with a (rightshifted by i)
 logic [N:0] sums [N-1:0];   // declare partial sums. Each row is N+1 bits. The final bit is the carry.
 
-
-assign carries[0] = 1'b0;
 assign sums[0][N-1:0] = pp[0]; // Assign first sum of partial product[0] and 0. 
-assign sums[0][N] = 1'b0;
+assign sums[0][N] = 1'b0;      // Assign first carry as 0.
 
 genvar i, j;
 generate 
@@ -27,7 +25,7 @@ generate
     N_ripple_adder #(N) adder ( // Generate ripple adders that add upper N bits of last partial sum with current partial product
       .A(pp[i]),
       .B(sums[i-1][N:1]),
-      .sum(sums[i]),
+      .sum(sums[i])
     );
 
     assign product[i-1] = sums[i-1][0]; // assign first N-1 bits of product from trailing sums LSBs

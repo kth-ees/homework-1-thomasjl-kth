@@ -3,7 +3,7 @@ module N_ripple_adder #(parameter N) (
   output logic [N:0] sum
 );
   wire logic [N:0] carries;
-  assign carries[0] = 1'0b;
+  assign carries[0] = 1'b0;
   
   genvar i;
   generate

@@ -1,7 +1,7 @@
 `timescale 1ns/1ns
 module ripple_adder_tb;
 
-  localparam N = 6;
+  localparam N = 8;
   logic [N-1:0] A,B;
   logic [N:0] sum;
 

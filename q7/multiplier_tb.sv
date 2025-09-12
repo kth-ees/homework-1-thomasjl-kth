@@ -8,7 +8,8 @@ module multiplier_tb;
   logic [N-1:0] a,b = '0;
   logic [2*N-1:0] product;
 
-  var unsigned int wrong_counter = 0;
+  var int wrong_counter = 0;
+  var int check_prod = 0;
 
   multiplier #(N) dut (
     .a(a),
