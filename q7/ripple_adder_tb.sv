@@ -3,20 +3,17 @@ module ripple_adder_tb;
 
   localparam N = 6;
   logic [N-1:0] A,B;
-  logic carry_in, carry_out;
-  logic [N-1:0] sum;
+  logic [N:0] sum;
 
   // complete
   N_ripple_adder #(N) dut(
     .A(A), .B(B),
-    .carry_in(carry_in), .carry_out(carry_out),
     .sum(sum)
   );
 
   initial begin
     var static int wrong_counter = 0;
     var static int check_sum = 0;
-    carry_in = 1'b0;
     for (int i=0;i<2**N;i++) begin
         A = i;
         for (int j=0;j<2**N;j++) begin
