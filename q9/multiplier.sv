@@ -1,4 +1,4 @@
-module 4bit_mult (
+module mult_4bit (
   input logic [3:0] a,b,
   output wire logic [7:0] product
 );
@@ -6,7 +6,7 @@ module 4bit_mult (
 endmodule
 
 // let's experiment with recursion. N must be a power of 2 >= 4 for this to work
-module #(parameter N) Nbit_mult_using_4 (
+module Nbit_mult_using_4 #(parameter N) (
   input logic [N-1:0] a,b,
   output wire logic [2*N-1:0] product
 );
@@ -36,18 +36,18 @@ genvar i, j;
 generate
   for (i=1;i<3;i++) begin
     for (j=1;j<3;j++) begin
-      if (N==4) begin
-        4bit_mult 4_bit_bottom_multipliers (
+      if (N==8) begin
+        mult_4bit bottom_multipliers_4bit (
           .a(a[(N/2)*i-1:(N/2)*(i-1)]),
           .b(b[(N/2)*j-1:(N/2)*(j-1)]),
-          .product(pp[i][j])
+          .product(pp[i-1][j-1])
         );
       end
       else begin
         Nbit_mult_using_4 #(N/2) recursive_multipliers (
           .a(a[(N/2)*i-1:(N/2)*(i-1)]),
           .b(b[(N/2)*j-1:(N/2)*(j-1)]),
-          .product(pp[i][j])
+          .product(pp[i-1][j-1])
         );
       end
     end
