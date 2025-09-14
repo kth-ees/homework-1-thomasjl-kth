@@ -5,7 +5,7 @@ module mult_4bit (
   assign product = a*b;
 endmodule
 
-// let's experiment with recursion. N must be a power of 2 >= 4 for this to work
+// let's experiment with recursion. N must be a power of 2 >= 8 for this to work
 module Nbit_mult_using_4 #(parameter N) (
   input logic [N-1:0] a,b,
   output wire logic [2*N-1:0] product
@@ -71,6 +71,12 @@ endmodule
 module multiplier (
   input  logic [15:0]a,b,
   output logic [31:0] product
+);
+
+Nbit_mult_using_4 #(N) mult (
+  .a(a),
+  .b(b),
+  .product(product)
 );
 
 endmodule
