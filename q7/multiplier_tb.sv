@@ -1,15 +1,15 @@
 `timescale 1ns/1ns
 module multiplier_tb;
 
-  localparam N = 4;
+  localparam N = 8;
 
   // complete
 
-  logic [N-1:0] a,b = '0;
-  logic [2*N-1:0] product;
+  logic signed [N-1:0] a,b = '0;
+  logic signed [2*N-1:0] product;
+  logic signed [2*N-1:0] check_prod;
 
   var int wrong_counter = 0;
-  var int check_prod = 0;
 
   multiplier #(N) dut (
     .a(a),
