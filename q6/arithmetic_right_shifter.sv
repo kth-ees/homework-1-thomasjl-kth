@@ -40,6 +40,23 @@ assign shifted_result[N-1] = input_data[N-1];
 
 endmodule
 
+module arithmetic_right_shifter_behavioural #(parameter N) (
+  input logic [N-1:0] input_data,
+  input logic [1:0] control,
+  output logic [N-1:0] shifted_result
+);
+
+  always_comb begin
+    case (control)
+    2'b00 : shifted_result = input_data;
+    2'b01 : shifted_result = {input_data[N-1], input_data[N-1:1]};
+    2'b10 : shifted_result = {input_data[N-1], input_data[N-1], input_data[N-1:2]};
+    2'b11 : shifted_result = {input_data[N-1], input_data[N-1], input_data[N-1], input_data[N-1:3]};
+    endcase
+  end
+
+endmodule
+
 module arithmetic_right_shifter_checker #(parameter N) (
   input logic signed [N-1:0] input_data,
   input logic [1:0] control,
