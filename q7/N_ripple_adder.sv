@@ -1,9 +1,10 @@
 module N_ripple_adder #(parameter N) (
   input logic [N-1:0] A,B,
-  output logic [N:0] sum
+  input logic carry_in,
+  output logic [N-1:0] sum
 );
   wire logic [N:0] carries;
-  assign carries[0] = 1'b0;
+  assign carries[0] = carry_in;
   
   genvar i;
   generate
@@ -18,6 +19,6 @@ module N_ripple_adder #(parameter N) (
     end
   endgenerate
 
-  assign sum[N] = carries[N];
+  //assign sum[N] = carries[N]; //ignore carry
 
 endmodule
