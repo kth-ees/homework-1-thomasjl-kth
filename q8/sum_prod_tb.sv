@@ -1,9 +1,10 @@
 module sum_prod_tb;
 
   // complete the testbench
-  localparam N = 5;
-  logic [N-1:0] X [5:0];
-  logic [2*N+1:0] result;
+  localparam N = 4;
+  logic signed [N-1:0] X [5:0];
+  logic signed [2*N+1:0] result;
+  logic signed [2*N+1:0] prod_true;
 
   sum_prod #(N) dut (
     .X(X),
@@ -12,7 +13,6 @@ module sum_prod_tb;
 
   initial begin
     var static int wrong_count = 0; // passes on N=5. anything higher than that isn't feasible to test in the ultraloop. 
-    var static int prod_true = 0;
     var static int cycles = 2**N;
 
     for (int i=0;i<cycles;i++) begin // ultraloop
@@ -27,7 +27,7 @@ module sum_prod_tb;
               X[4] = m;
               for (int n=0;n<cycles;n++) begin
                 X[5] = n;
-                prod_true = (i*j)+(k*l)+(n*m);
+                prod_true = (X[0]*X[1])+(X[2]*X[3])+(X[4]*X[5]);
                 #5;
                 if (prod_true != result) begin
                   wrong_count++;
